@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<link rel="stylesheet" href="../css/ms.css">
+	<title>自动标注</title>
+	<style type="text/css">
+	#ii{
+	margin: 70px 150px; 
+	border:1px solid #000000;position: relative;
+	}
+	#ttitle{
+	margin: 50px 00px; 
+	font-size: 50px;
+	float: left;
+	}
+	#ttitle2{
+	/*margin: 0px 40px; /*margin后面两个参数难道不是与上部和左部的边距吗?*/
+	margin: 0px 20px;
+	}
+	</style> 
+	<style type="text/css">
+	#res_div{
+	margin: 0px 00px;
+	padding-top: 10px;
+	padding: 10px -10px;
+	margin-top: 10px;
+	font-size: 30px;
+	}
+	</style> 
+</head>
+<body>
+	<div class="main">
+		<ul>
+			<li class="clearfix">
+				<script src="text_rec.js"></script>
+				<div id="app">
+				    <img id="text_img" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;">
+				    <!-- 图片上传 -->
+				    <input
+				      id="input"
+				      class="input"
+				      type="file"
+				      ref="input"
+				      accept=".jpg, .jpeg, .png, .JPG, .JPEG, .PNG, .bmp, .BMP"
+				      onchange="inputChange()"
+				    />
+				    <button onclick="upload()">开始识别</button>
+			  	</div>
+				<div id="res_div">
+				    <a id="result">识别结果：</a>
+			  	</div>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

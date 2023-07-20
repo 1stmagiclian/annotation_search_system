@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<link rel="stylesheet" href="../css/ms.css">
+	<title>自动标注</title>
+	<style type="text/css">
+	#ii{
+	margin: 70px 150px; 
+	border:1px solid black;position: relative; 
+	}
+	#ttitle{
+	margin: 50px 00px; 
+	font-size: 50px;
+	float: left;
+	}
+	#ttitle2{
+	/*margin: 0px 40px; /*margin后面两个参数难道不是与上部和左部的边距吗?*/
+	margin: 0px 20px;
+	}
+	</style> 
+	<style type="text/css">
+	#res_div{
+	margin: 0px 00px;
+	padding-top: 10px;
+	padding: 10px -10px;
+	margin-top: 10px;
+	font-size: 30px;
+	}
+	</style> 
+</head>
+<body>
+	<div class="header clearfix">
+		<!-- <b id="ttitle">&nbsp;多标签标注系统</b>??? -->
+		<b id="ttitle">多标签标注系统</b>
+		<ul class="clearfix" id="ttitle2">
+			<li><a href="../../index.html">首页</a></li>
+			<li><a href="../../files/html/jd.html">人工标注</a></li>
+			<li><a href="../../files/html/ms.html">自动标注</a></li>
+			<li><a href="../../files/html/wh.html">数据信息库</a></li>
+			<li><a href="../../files/html/rw.html">个人中心</a></li>
+		</ul>
+	</div>
+	<div class="main">
+		<ul>
+			<li class="clearfix">
+				<script src="text_rec.js"></script>
+				<div id="app">
+				    <img id="text_img" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;">
+				    <!-- 图片上传 -->
+				    <input
+				      id="input"
+				      class="input"
+				      type="file"
+				      ref="input"
+				      accept=".jpg, .jpeg, .png, .JPG, .JPEG, .PNG, .bmp, .BMP"
+				      onchange="inputChange()"
+				    />
+				    <button onclick="upload()">开始识别</button>
+			  	</div>
+				<div id="res_div">
+				    <a id="result">识别结果：</a>
+			  	</div>
+			</li>
+		</ul>
+		<table class="header clearfix">
+		  <tbody>
+		    <tr>
+		      <td><img id="text_img1" alt="Vue logo" src="C:\\Users\\wzz\\Desktop\\Dictionary-Learning\\3000_image\\0\\1116.jpg" style="width:300px;height:300px;" onclick="tableClick(this)"></td>
+		      <td><img id="text_img2" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"></td>
+		      <td><img id="text_img3" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"></td>
+		      <td><img id="text_img4" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"></td>
+		    </tr>
+		    <tr>
+		      <td><img id="text_img5" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"></td>
+		      <td><img id="text_img6" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"></td>
+		      <td><img id="text_img7" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"></td>
+		      <td><img id="text_img8" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"></td>
+		    </tr>
+		    <tr>
+		      <td><img id="text_img9" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"></td>
+		      <td><img id="text_img10" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"></td>
+		      <td><img id="text_img11" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"></td>
+		      <td><img id="text_img12" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"></td>
+		    </tr>
+		  </tbody>
+		  <colgroup>
+		    <col>
+		    <col>
+		    <col>
+		    <col>
+		  </colgroup>
+		</table>
+		<div class="header clearfix">
+			<form>
+			页数:<input id="pageText" type="text" name="page">
+			<button type="button" onclick="changePage()">跳转</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

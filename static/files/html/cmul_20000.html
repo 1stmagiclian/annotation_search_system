@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<link rel="stylesheet" href="../css/ms.css">
+	<title>自动标注</title>
+	<style type="text/css">
+	#ii{
+	margin: 70px 150px; 
+	border:1px solid black;position: relative; 
+	}
+	#ttitle{
+	margin: 50px 00px; 
+	font-size: 50px;
+	float: left;
+	}
+	#ttitle2{
+	/*margin: 0px 40px; /*margin后面两个参数难道不是与上部和左部的边距吗?*/
+	margin: 0px 20px;
+	}
+	</style> 
+	<style type="text/css">
+	#res_div{
+	margin: 0px 00px;
+	padding-top: 10px;
+	padding: 10px -10px;
+	margin-top: 10px;
+	font-size: 30px;
+	}
+	</style>
+	<script type="text/javascript" charset="utf-8">
+		ip="39.107.97.152"
+		// ip="127.0.0.1"
+		is_local=0
+		input_url=""
+		labels=""
+		function upload(){
+		  if(this.is_local=="0"){
+		    var render = new FileReader();
+		    var text_img = document.getElementById("text_img");
+		    render.readAsDataURL(this.file);
+		    render.onload = function () {
+		      this.img_base64=render.result;
+		      let formData=new FormData()
+		      // 向formData实例中追加属性 (参数1：属性名 参数2：属性值)
+		      formData.append('img_base64',this.img_base64);
+		      formData.append('is_local',is_local);
+		      const req=new XMLHttpRequest()
+		      req.onreadystatechange = function(){
+		        if(req.readyState===4){
+		          var result_h2 = document.getElementById("result");
+		          console.log("识别结果："+req.response)
+		          result_h2.innerHTML="识别结果："+req.response;
+		        }
+		      }
+		      req.open('post','http://'+ip+':8888/classification_20000',true)
+		      req.send(formData)
+		      var result_h2 = document.getElementById("result");
+		      result_h2.innerHTML="识别结果：识别中"
+		    };
+		  }else{
+		    let formData=new FormData()
+		    // 向formData实例中追加属性 (参数1：属性名 参数2：属性值)
+		    input_url_len=this.input_url.length
+		    formData.append('path',this.input_url.substring(8,input_url_len));
+		    formData.append('is_local',this.is_local);
+		    const req=new XMLHttpRequest()
+		    req.onreadystatechange = function(){
+		      if(req.readyState===4){
+		        var result_h2 = document.getElementById("result");
+		        console.log("识别结果："+req.response)
+		        result_h2.innerHTML="识别结果："+req.response;
+		      }
+		    }
+		    req.open('post','http://'+ip+':8888/classification_20000',true)
+		    req.send(formData)
+		    var result_h2 = document.getElementById("result");
+		    result_h2.innerHTML="识别结果：识别中"
+		  }
+		}
+		function inputChange() {
+		  var e = document.getElementById("input");
+		  if (e.files.length === 0) {
+		    return
+		  }
+		  const file = e.files[0]
+		  this.file=file
+		  var url=window.URL.createObjectURL(file)
+		  var text_img = document.getElementById("text_img");
+		  text_img.src=url
+
+		  is_local=0
+		}
+	</script>
+</head>
+<body>
+	<div class="header clearfix">
+		<!-- <b id="ttitle">&nbsp;多标签标注系统</b>??? -->
+		<b id="ttitle">多标签标注系统</b>
+		<ul class="clearfix" id="ttitle2">
+			<li><a href="../../index.html">首页</a></li>
+			<li><a href="../../files/html/jd.html">人工标注</a></li>
+			<li><a href="../../files/html/ms.html">自动标注</a></li>
+			<li><a href="../../files/html/wh.html">数据信息库</a></li>
+			<li><a href="../../files/html/rw.html">个人中心</a></li>
+		</ul>
+	</div>
+	<div class="main">
+		<ul>
+			<li class="clearfix">
+				<div id="app">
+				    <img id="text_img" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;">
+				    <!-- 图片上传 -->
+				    <input
+				      id="input"
+				      class="input"
+				      type="file"
+				      ref="input"
+				      accept=".jpg, .jpeg, .png, .JPG, .JPEG, .PNG, .bmp, .BMP"
+				      onchange="inputChange()"
+				    />
+				    <button onclick="upload()">开始识别</button>
+			  	</div>
+				<div id="res_div">
+				    <a id="result">识别结果：</a>
+			  	</div>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<link rel="stylesheet" href="../css/ms.css">
+	<title>个人中心</title>
+	<style type="text/css">
+	#ii{
+	margin: 70px 150px; 
+	border:1px solid black;position: relative; 
+	}
+	#ttitle{
+	margin: 50px 00px; 
+	font-size: 50px;
+	float: left;
+	text-align:center;
+	}
+	#ttitle2{
+	/*margin: 0px 40px; /*margin后面两个参数难道不是与上部和左部的边距吗?*/
+	margin: 0px 20px;
+	}
+	</style> 
+	<style type="text/css">
+	#res_div{
+	margin: 0px 00px;
+	padding-top: 10px;
+	padding: 10px -10px;
+	margin-top: 10px;
+	font-size: 30px;
+	}
+	#ttable{
+	text-align:center;
+	}
+	</style>
+	<script type="text/javascript" charset="utf-8">
+		function login(){
+			alert("登录成功")
+			var username_text=document.getElementById("username");
+			localStorage.setItem("username",username_text.value)
+		}
+		if(localStorage.getItem("username")!=null){
+			alert("已登录，用户名为"+localStorage.getItem("username"))
+		}
+	</script>
+</head>
+<body>
+	<div class="header clearfix">
+		<!-- <b id="ttitle">&nbsp;多标签标注系统</b>??? -->
+		<b id="ttitle">多标签标注系统</b>
+		<ul class="clearfix" id="ttitle2">
+			<li><a href="../../index.html">首页</a></li>
+			<li><a href="../../files/html/jd.html">人工标注</a></li>
+			<li><a href="../../files/html/ms.html">自动标注</a></li>
+			<li><a href="../../files/html/wh.html">数据信息库</a></li>
+			<li><a href="../../files/html/rw.html">个人中心</a></li>
+		</ul>
+	</div>
+	<div class="main">
+		<ul>
+			<li class="clearfix">
+				账号：<input
+			      id="username"
+			      class="input"
+			      type="text"
+			      ref="input"
+			    />
+			    密码：<input
+			      id="password"
+			      class="input"
+			      type="password"
+			      ref="input"
+			    />
+			    <button onclick="login()">登录</button>
+			    <button onclick='location.href=("../../files/html/register.html")'>注册</button>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<link rel="stylesheet" href="../css/ms.css">
+	<title>标注页面</title>
+	
+	<style type="text/css">
+	#ii{
+	margin: 70px 150px; 
+	border:1px solid black;position: relative; 
+	}
+	#ttitle{
+	margin: 50px 00px; 
+	font-size: 50px;
+	float: left;
+	text-align:center;
+	}
+	#ttitle2{
+	/*margin: 0px 40px; /*margin后面两个参数难道不是与上部和左部的边距吗?*/
+	margin: 0px 20px;
+	}
+	</style> 
+
+	<style type="text/css">
+	#res_div{
+	margin: 0px 00px;
+	padding-top: 10px;
+	padding: 10px -10px;
+	margin-top: 10px;
+	font-size: 30px;
+	}
+	#ttable{
+	text-align:center;
+	}
+	.top-style {
+		position: absolute;
+		left: 40%;
+		top: 3%;
+	}
+	.ref {
+		position: absolute;
+		left: 70%;
+		top: 4%;
+	}
+	.img_wrap{
+		object-fit: contain;
+	}
+	</style>
+	<script src="text_rec.js"></script>
+</head>
+<body>
+	<!-- <div class="header clearfix">
+		<b id="ttitle">多标签标注系统</b>
+		<ul class="clearfix" id="ttitle2">
+			<li><a href="../../index.html">首页</a></li>
+			<li><a href="../../files/html/jd.html">人工标注</a></li>
+			<li><a href="../../files/html/ms.html">自动标注</a></li>
+			<li><a href="../../files/html/wh.html">数据信息库</a></li>
+			<li><a href="../../files/html/rw.html">个人中心</a></li>
+		</ul>
+	</div> -->
+	<div class="main">
+		<!-- <ul>
+			<li class="clearfix">
+				<div id="app">
+				    <img id="text_img" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;">
+				    <input
+				      id="input"
+				      class="input"
+				      type="file"
+				      ref="input"
+				      accept=".jpg, .jpeg, .png, .JPG, .JPEG, .PNG, .bmp, .BMP"
+				      onchange="inputChange()"
+				    />
+				    要进行标注的标签：<input
+				      id="input label"
+				      class="input label"
+				      type="text"
+				      ref="input"
+				      accept=".jpg, .jpeg, .png, .JPG, .JPEG, .PNG, .bmp, .BMP"
+				    />
+				    <button onclick="artificialAnnotation()">标注</button>
+			  	</div>
+			</li>
+		</ul> -->
+		
+		<div class="top-style">
+			<form>
+				<select id="qicai">
+					<option value="0">全部</option>
+					<!-- <option value="1">陶瓷</option>
+					<option value="2">文献</option> -->
+				</select>
+				
+				<select id="pre_wenyang" onchange="pre_wenyang_change(this)">
+					<option value="0">植物纹</option>
+					<option value="1">动物纹</option>
+					<option value="2">几何纹</option>
+					<option value="3">自然纹</option>
+					<option value="4">图腾纹</option>
+					<option value="5">组合纹</option>
+				</select>
+
+				<select id="wenyang">
+					<option value="0">纹样</option>
+					<!-- <option value="1">龙纹</option>
+					<option value="2">鱼纹</option> -->
+				</select>
+				
+				<select id="zhidi">
+					<option value="0">全部</option>
+					<!-- <option value="1">龙纹</option>
+					<option value="2">鱼纹</option> -->
+				</select>
+			
+			<button type="button" onclick="getSelect()">确认</button>
+				
+			</form>
+		</div>
+
+		<div>
+			<a class="ref" style="text-decoration:underline;" href="newSystem_classification.html">跳转到自动标注页面</a>
+		</div>
+		<!-- <script>
+		    $('#qicai').click(function(){
+		    	alert("登录后才能标注")
+		    });
+		</script> -->
+		<table class="header clearfix">
+		  <tbody>
+		    <tr>
+		      <td id="ttable"><img id="text_img1" class="img_wrap" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"><br>
+		      	<b id="text_label1">a</b></td>
+		      <td id="ttable"><img id="text_img2" class="img_wrap" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"><br>
+		      	<b id="text_label2">a</b></td>
+		      <td id="ttable"><img id="text_img3" class="img_wrap" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"><br>
+		      	<b id="text_label3">a</b></td>
+		      <td id="ttable"><img id="text_img4" class="img_wrap" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"><br>
+		      	<b id="text_label4">a</b></td>
+		    </tr>
+		    <tr>
+		      <td id="ttable"><img id="text_img5" class="img_wrap" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"><br>
+		      	<b id="text_label5">a</b></td>
+		      <td id="ttable"><img id="text_img6" class="img_wrap" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"><br>
+		      	<b id="text_label6">a</b></td>
+		      <td id="ttable"><img id="text_img7" class="img_wrap" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"><br>
+		      	<b id="text_label7">a</b></td>
+		      <td id="ttable"><img id="text_img8" class="img_wrap" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"><br>
+		      	<b id="text_label8">a</b></td>
+		    </tr>
+		    <tr>
+		      <td id="ttable"><img id="text_img9" class="img_wrap" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"><br>
+		      	<b id="text_label9">a</b></td>
+		      <td id="ttable"><img id="text_img10" class="img_wrap" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"><br>
+		      	<b id="text_label10">a</b></td>
+		      <td id="ttable"><img id="text_img11" class="img_wrap" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"><br>
+		      	<b id="text_label11">a</b></td>
+		      <td id="ttable"><img id="text_img12" class="img_wrap" alt="Vue logo" src="./logo.png" style="width:300px;height:300px;" onclick="tableClick(this)"><br>
+		      	<b id="text_label12">a</b></td>
+		    </tr>
+		  </tbody>
+		  <colgroup>
+		    <col>
+		    <col>
+		    <col>
+		    <col>
+		  </colgroup>
+		</table>
+		<div class="header clearfix">
+			<button type="button" id="button1" onclick="changePage(this)">1</button>
+			<button type="button" id="button2" onclick="changePage(this)">2</button>
+			<button type="button" id="button3" onclick="changePage(this)">3</button>
+			<button type="button" id="button4" onclick="changePage(this)">4</button>
+			<button type="button" id="button5" onclick="changePage(this)">5</button>
+			<button type="button" id="button6" onclick="changePage(this)">6</button>
+			<button type="button" id="button7" onclick="changePage(this)">7</button>
+			<button type="button" id="button8" onclick="changePage(this)">8</button>
+			<button type="button" id="button9" onclick="changePage(this)">9</button>
+			<button type="button" id="button10" onclick="changePage(this)">10</button>
+			<button type="button" id="button11" onclick="changePage(this)">11</button>
+			<button type="button" id="button12" onclick="changePage(this)">12</button>
+			<button type="button" id="button13" onclick="changePage(this)">13</button>
+			<button type="button" id="button14" onclick="changePage(this)">14</button>
+			<button type="button" id="button15" onclick="changePage(this)">15</button>
+			<button type="button" id="button16" onclick="changePage(this)">16</button>
+			<button type="button" id="button17" onclick="changePage(this)">17</button>
+			<button type="button" id="button18" onclick="changePage(this)">18</button>
+			<button type="button" id="button19" onclick="changePage(this)">19</button>
+			<button type="button" id="button20" onclick="changePage(this)">20</button>
+		</div>
+	</div>
+</body>
+</html>
