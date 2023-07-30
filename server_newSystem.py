@@ -124,11 +124,13 @@ def getImages():
         # pass
     else:
         res2=wenyangs_dir[wenyang]
+        print("res2:",res2)
         res=[val for val in res if val in res2]
     if zhidi == 'undefined' or zhidi == '全部':
         pass
     else:
         res3=zhidis_dir[zhidi]
+        print("res3:",res3)
         res=[val for val in res if val in res3]
     res=res[start*12:start*12+12]
     labels=list()
@@ -136,6 +138,7 @@ def getImages():
         # temp_labels=all_file_dir[file_url]
         # labels.append(temp_labels[0]+'_'+temp_labels[1]+'_'+temp_labels[2])
         labels.append(path_to_name[file_url])
+        print("labels:",labels)
     res = {"url": res, "labels": labels}
     # dir_path = "./纹样_器材"
     # all_res=list()
