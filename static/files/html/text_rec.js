@@ -56,7 +56,11 @@ function changePage(pageButton) {
   var options = select.options;      
   var index = select.selectedIndex;       
   var selectedText = options[index].text;
-  
+
+  var select1 = document.getElementById("pre_wenyang");
+  var options1 = select1.options;
+  var index1 = select1.selectedIndex;
+  var selectedText1 = options1[index1].text;
   
   var select2 = document.getElementById("wenyang");
   var options2 = select2.options;      
@@ -68,7 +72,7 @@ function changePage(pageButton) {
   var options3 = select3.options;      
   var index3 = select3.selectedIndex;       
   var selectedText3 = options3[index3].text;
-  getImages(pageButton.innerHTML,selectedText,selectedText2,selectedText3)
+  getImages(pageButton.innerHTML,selectedText,selectedText1,selectedText2,selectedText3)
 
   for(var i=1;i<=20;i++){
     var button = document.getElementById("button"+i);
@@ -163,7 +167,7 @@ function upload(){
       req.open('post','http://'+ip+':8888/classification',true)
       req.send(formData)
       var result_h2 = document.getElementById("result");
-      result_h2.innerHTML="识别结果：识别中"
+      result_h2.innerHTML="识别结果：系统自动标注识别中"
     };
   }else{
     let formData=new FormData()
@@ -182,7 +186,7 @@ function upload(){
     req.open('post','http://'+ip+':8888/classification',true)
     req.send(formData)
     var result_h2 = document.getElementById("result");
-    result_h2.innerHTML="识别结果：识别中"
+    result_h2.innerHTML="识别结果：系统自动标注识别中"
   }
 }
 function artificialAnnotation(){

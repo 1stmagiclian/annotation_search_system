@@ -20,6 +20,7 @@ import torch
 import torch.nn as nn
 # from cnn_train_AlexNet import *
 from PIL import Image
+import time
 
 class AlexNet(nn.Module):
     def __init__(self,num_classes=10):
@@ -140,39 +141,8 @@ def getImages():
         labels.append(path_to_name[file_url])
         print("labels:",labels)
     res = {"url": res, "labels": labels}
-    # dir_path = "./纹样_器材"
-    # all_res=list()
-    # all_res_labels=list()
-    # if os.path.isdir(dir_path):
-    #     for root, dirs, files in os.walk(dir_path, topdown=False):
-    #         for file_name in files:
-    #             index = files.index(file_name)
-    #             if ".info" in file_name or "Ambient" in file_name or "DEADJOE" in file_name or ".LOG" in file_name:
-    #                 continue
-    #             labels_infor = file_name.split("(")[0].strip()
-    #             first_layer_label = labels_infor.split("_")[0].strip()
-    #             second_layer_label = labels_infor.split("_")[1].strip()
-    #             second_layer_label = second_layer_label.split(".")[0].strip()
-    #             file_path=root + "/" + file_name
-    #             print(first_layer_label+"_"+second_layer_label)
-    #             is_ok=0
-    #             if wenyang == 'undefined' or wenyang == '纹样' or first_layer_label == wenyang:
-    #                 is_ok+=1
-    #             if qicai == 'undefined' or qicai == '器材' or second_layer_label==qicai:
-    #                 is_ok+=1
-    #             if is_ok==2:
-    #                 # all_res.append(file_path)
-    #                 all_res.extend([os.path.abspath(file_path)])
-    #                 all_res_labels.append(first_layer_label+"_"+second_layer_label)
-    #
-    # res={"url":all_res[start*12:start*12+12],"labels":all_res_labels[start*12:start*12+12]}
+
     return json.dumps(res)
-
-# @route('/getLabels', method='POST')
-# def getLabels():
-#     # 图片上传保存的路径
-#     return json.dumps([first_layer_labels,second_layer_labels])
-
 
 
 @route('/getLabels', method='POST')
@@ -241,41 +211,33 @@ def cnn_feature(img_path):
         res = res.argmax()
         res_str=res_str+"  "+list(zhidis_dir.keys())[res]
         print("res = ", res_str)
+    time.sleep(3)
     return res_str
 
 
 
 if __name__ == '__main__':
-    # dir_path = "./纹样_器材"
-    # first_layer_labels=list()
-    # second_layer_labels=list()
-    # if os.path.isdir(dir_path):
-    #     for root, dirs, files in os.walk(dir_path, topdown=False):
-    #         for file_name in files:
-    #             index = files.index(file_name)
-    #             if ".info" in file_name or "Ambient" in file_name or "DEADJOE" in file_name or ".LOG" in file_name:
-    #                 continue
-    #             labels_infor = file_name.split("(")[0].strip()
-    #             first_layer_label = labels_infor.split("_")[0].strip()
-    #             second_layer_label = labels_infor.split("_")[1].strip()
-    #             second_layer_label = second_layer_label.split(".")[0].strip()
-    #             if first_layer_label not in first_layer_labels:
-    #                 first_layer_labels.append(first_layer_label)
-    #             if second_layer_label not in second_layer_labels:
-    #                 second_layer_labels.append(second_layer_label)
+
     all_file_url=list()
     all_file_dir={}
     excel_paths = ['故宫博物院数字文物库-1-324 - 副本.xlsx',
                    '故宫博物院数字文物库-325-949 - 副本.xlsx',
                    '故宫博物院数字文物库-950-1399 - 副本.xlsx',
                    '故宫博物院数字文物库-1400-1999 - 副本.xlsx',
-                   '故宫博物院数字文物库-2000-2594 - 副本.xlsx']
+                   '故宫博物院数字文物库-2000-2594 - 副本.xlsx',
+                   '民族服饰 - 汉族.xlsx']
     pre_url = 'http://10.156.8.23:8086/image/wuyuhui/故宫博物院/'
+    preurl = 'http://10.156.8.23:8086/image/liuyaozong/民族服饰 - 汉族/07-11 113638/'
+
     part_urls = [pre_url + '故宫博物院数字文物库-1-324',
                  pre_url + '故宫博物院数字文物库-325-949',
                  pre_url + '故宫博物院数字文物库-950-1399',
                  pre_url + '故宫博物院数字文物库-1400-1999',
-                 pre_url + '故宫博物院数字文物库-2000-2594']
+                 pre_url + '故宫博物院数字文物库-2000-2594',
+                 preurl]
+    # excel_paths=['民族服饰 - 汉族.xlsx']
+    # pre_url = 'http://10.156.8.23:8086/image/liuyaozong/民族服饰 - 汉族/07-11 113638/'
+    # part_urls=[pre_url]
     # qicais=['织绣', '珐琅器', '漆器', '生活用具', '铜器', '陶瓷', '其他工艺', '外国文物', '玉石器', '石器', '石刻', '玉器', '陶器', '瓷器', '砖瓦', '金银器', '木器', '书法', '绘画', '雕塑造像', '甲骨简牍', '文献文书', '文具', '货币', '印信', '近现代文物', '民俗文物', '少数民族文物', '自然标本']
    
     qicais_dir = {} #用于存储不同类别的图像路径
