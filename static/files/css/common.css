@@ -1,6 +1,5 @@
 @charset "utf-8";
 /* CSS Document */
-
 *{
 	box-sizing:border-box;
 	-moz-box-sizing:border-box;
@@ -24,7 +23,7 @@ body{
 	font-size:12px;
 	font-family:Arial,Verdana,Tahoma,"微软雅黑","黑体";
 	line-height:120%;
-	background: url(../../img/bg5.jpg);
+	background: url(../../img/bg4.jpg);
 	background-size: 100%;
 	margin:0;
 	overflow-x:hidden;

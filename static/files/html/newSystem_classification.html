@@ -1,48 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="../css/common.css">
-	<link rel="stylesheet" href="../css/ms.css">
-	<title>自动标注</title>
-	<style type="text/css">
-	.input{
-		margin-top: 60px;
-	}
-	.clearfix1:before,.clearfix1:after{
-		display:table;
-		content:"";
-	}
-	.clearfix1:after{
-		clear:both;
-	}
-	#res_div{
-		margin-top: 90px; /* Add some space between the elements */
-		font-size: 30px;
-	}
-	</style> 
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/ms.css">
+    <title>自动标注</title>
+    <style type="text/css">
+        /* 共用样式 */
+        /* ... */
+
+        /* 自动标注页面样式 */
+        /* ... */
+
+        /* 重构后的样式 */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url(../../img/bg4.jpg) no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        #app {
+            background-color: rgba(229, 233, 232, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 20px #666;
+            text-align: center;
+            display: flex;
+            flex-direction: column; /* 垂直布局 */
+            align-items: center;
+            justify-content: center;
+            height: 500px;
+            width: 600px;
+            padding: 20px;
+        }
+
+        #text_img {
+            width: 300px;
+            height: 300px;
+            border: 1px solid gray;
+            border-radius: 70%;
+            margin-bottom: 20px; /* 调整与下方内容的间距 */
+        }
+
+        .input-wrapper {
+            display: flex; /* 水平布局 */
+            flex-direction: row; /* 水平排列 */
+            align-items: center;
+            margin-bottom: 20px; /* 增加下方间距 */
+        }
+
+        .input {
+            display: none; /* 隐藏默认的文件上传控件 */
+        }
+
+        .custom-file-upload {
+			width: 100px; /* 设置按钮宽度 */
+            height: 40px; /* 设置按钮高度 */
+            background-color: #e54114;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px; /* 增加右侧间距 */
+        }
+
+        .custom-file-upload:hover {
+            background-color: #ed8f15;
+        }
+
+        button {
+			width: 100px; /* 设置按钮宽度 */
+            height: 40px; /* 设置按钮高度 */
+            background-color: #e54114;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-left: 70px; /* 增加左侧间距 */
+        }
+
+        button:hover {
+            background-color: #ed8f15;
+        }
+
+        #res_div {
+            margin-top: 20px;
+            font-size: 30px;
+        }
+    </style>
+    <script src="text_rec.js"></script> <!-- 将 JavaScript 文件添加回来 -->
 </head>
 <body>
-	<div class="container">
-		<div class="main">
-			<ul>
-				<li class="clearfix1">
-					<script src="text_rec.js"></script>
-					<div id="app">
-					    <img id="text_img" alt="Vue logo" src="" style="width:300px;height:300px;">
-					    <!-- 图片上传 -->
-					    <input id="input"class="input" type="file" ref="input" 
-							accept=".jpg, .jpeg, .png, .JPG, .JPEG, .PNG, .bmp, .BMP"
-					      onchange="inputChange()"
-					    />
-					    <button onclick="upload()">开始识别</button>
-				  	</div>
-					<div id="res_div">
-					    <a id="result">识别结果：</a>
-				  	</div>
-				</li>
-			</ul>
-		</div>
-	</div>
+<div class="container">
+    <div id="app">
+        <img id="text_img" alt="Vue logo" src="../../img/bg4.jpg">
+        <div class="input-wrapper">
+            <input id="input" class="input" type="file" ref="input" accept=".jpg, .jpeg, .png, .JPG, .JPEG, .PNG, .bmp, .BMP" onchange="inputChange()">
+            <label for="input" class="custom-file-upload">选择文件</label>
+            <button onclick="upload()">标注开始</button>
+        </div>
+        <div id="res_div">
+            <a id="result">标注结果：</a>
+        </div>
+    </div>
+</div>
 </body>
 </html>
