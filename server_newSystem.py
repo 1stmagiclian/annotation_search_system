@@ -206,11 +206,11 @@ def cnn_feature(img_path):
         res_str=res_str+"  "+list(wenyangs_dir.keys())[res]
         print("res = ", res_str)
         
-        res = zhidi_model.forward(batch_x, False).T
-        res = res.T[0]
-        res = res.argmax()
-        res_str=res_str+"  "+list(zhidis_dir.keys())[res]
-        print("res = ", res_str)
+        # res = zhidi_model.forward(batch_x, False).T
+        # res = res.T[0]
+        # res = res.argmax()
+        # res_str=res_str+"  "+list(zhidis_dir.keys())[res]
+        # print("res = ", res_str)
     time.sleep(3)
     return res_str
 
@@ -327,9 +327,9 @@ if __name__ == '__main__':
     wenyang_model = AlexNet(140)  # 调用模型Model
     wenyang_model.load_state_dict(torch.load(model_path[1]))  # 加载模型参数
     wenyang_model.eval()
-    zhidi_model = AlexNet(23)  # 调用模型Model
-    zhidi_model.load_state_dict(torch.load(model_path[2]))  # 加载模型参数
-    zhidi_model.eval()
+    # zhidi_model = AlexNet(23)  # 调用模型Model
+    # zhidi_model.load_state_dict(torch.load(model_path[2]))  # 加载模型参数
+    # zhidi_model.eval()
 
     qicais_dir['服饰']=list()
 
