@@ -157,17 +157,23 @@ function upload(){
       formData.append('img_base64',this.img_base64);
       formData.append('is_local',is_local);
       const req=new XMLHttpRequest()
-      req.onreadystatechange = function(){
-        if(req.readyState===4){
+      req.onreadystatechange = function () {
+        if (req.readyState === 4) {
           var result_h2 = document.getElementById("result");
-          console.log("识别结果："+req.response)
-          result_h2.innerHTML="识别结果："+req.response;
+          var responseText = req.response;
+
+          // 包装要显示的文本内容，设置其颜色为红色
+          var redText = "<span style='color: red;'>" + responseText + "</span>";
+
+          console.log("识别结果：" + responseText);
+          result_h2.innerHTML = "识别结果：" + redText;
         }
-      }
+      };
       req.open('post','http://'+ip+':8888/classification',true)
+      console.log("formData",formData)
       req.send(formData)
       var result_h2 = document.getElementById("result");
-      result_h2.innerHTML="识别结果：系统自动标注识别中"
+      result_h2.innerHTML="系统自动标注识别中..."
     };
   }else{
     let formData=new FormData()
@@ -186,7 +192,7 @@ function upload(){
     req.open('post','http://'+ip+':8888/classification',true)
     req.send(formData)
     var result_h2 = document.getElementById("result");
-    result_h2.innerHTML="识别结果：系统自动标注识别中"
+    result_h2.innerHTML="识别结果：系统自动标注识别中..."
   }
 }
 function artificialAnnotation(){

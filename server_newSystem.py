@@ -203,7 +203,7 @@ def cnn_feature(img_path):
         res = wenyang_model.forward(batch_x, False).T
         res = res.T[0]
         res = res.argmax()
-        res_str=res_str+"  "+list(wenyangs_dir.keys())[res]
+        res_str=res_str+" , "+list(wenyangs_dir.keys())[res]
         print("res = ", res_str)
         
         # res = zhidi_model.forward(batch_x, False).T
