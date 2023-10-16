@@ -6,7 +6,7 @@
 # @Project  : 简答题399___baidu_ocr.py
 # @File     : 简答题457___轻量级服务器lighthouse搭建.py
 import traceback
-from bottle import route, run, request, response
+from bottle import route, run, request, response, HTTPResponse
 from bottle import hook
 from json import dumps
 import base64
@@ -154,20 +154,40 @@ def getLabels():
     list2 = list(zhidis_dir.keys())
     return json.dumps([list(qicais_dir.keys()),['串枝花纹', '勾莲纹', '勾莲花卉纹', '四瓣花纹', '团花纹','宝相花纹','折枝桃纹','折枝花卉纹', '折枝花蝶纹', '折枝莲纹', '朵花纹','树皮纹', '桃竹纹', '梅兰纹', '梅纹', '梅花纹', '水仙花纹', '海棠纹','灵芝纹','牡丹纹','百合花纹','石榴纹', '石榴花纹','石竹花纹','胡桃纹', '芍药纹', '芙蓉纹', '芙蓉花纹', '花卉纹','花果纹', '花纹', '荔枝纹','荷叶纹', '荷莲纹','莲实纹', '莲瓣纹', '莲纹', '莲花纹', '菊瓣纹', '菊纹', '菊花纹','萱草纹', '葡萄纹', '葫芦纹', '西番莲纹'],list(zhidis_dir.keys())])
 
-
-
+#微信小程序版本
 @route('/classification', method='POST')
 def recognition():
-    img_base64 = request.forms.get('img_base64')
-    img_base64=img_base64.split(',')[1]
-    uploadfile = base64.b64decode(img_base64)
-    temp_save="./temp_save"
-    if os.path.exists(temp_save) is False:
-        os.mkdir(temp_save)
-    with open(temp_save+"/1.png", 'wb') as f:
-        f.write(uploadfile)
-    rec_res=cnn_feature(temp_save+"/1.png")
-    return rec_res
+    img_file = request.files.get('img_file')
+    if img_file:
+        # 获取上传文件的内容
+        file_content = img_file.file.read()
+        temp_save = "./temp_save"
+        if not os.path.exists(temp_save):
+            os.mkdir(temp_save)
+        with open(temp_save + "/1.png", 'wb') as f:
+            f.write(file_content)
+        rec_res = cnn_feature(temp_save + "/1.png")
+        return rec_res
+    else:
+        # 处理未收到有效图像文件的情况，例如返回一个错误消息
+        response = HTTPResponse(status=400, body="未接收到有效图像文件")
+        return response
+
+#网页版本
+# @route('/classification', method='POST')
+# def recognition():
+#     img_base64 = request.forms.get('img_base64')
+#     img_base64=img_base64.split(',')[1]
+#     uploadfile = base64.b64decode(img_base64)
+#     temp_save="./temp_save"
+#     if os.path.exists(temp_save) is False:
+#         os.mkdir(temp_save)
+#     with open(temp_save+"/1.png", 'wb') as f:
+#         f.write(uploadfile)
+#     rec_res=cnn_feature(temp_save+"/1.png")
+#     return rec_res
+
+
 
 def load_img_with_path(file_path):
     image = Image.open(file_path)
