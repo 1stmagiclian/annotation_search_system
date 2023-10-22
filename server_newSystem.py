@@ -21,6 +21,16 @@ import torch.nn as nn
 # from cnn_train_AlexNet import *
 from PIL import Image
 import time
+import mysql.connector
+
+connection = mysql.connector.connect(
+    host="your_host",
+    user="your_user",
+    password="your_password",
+    database="your_database"
+)
+cursor = connection.cursor()
+
 
 class AlexNet(nn.Module):
     def __init__(self,num_classes=10):
@@ -187,6 +197,19 @@ def recognition():
 #     rec_res=cnn_feature(temp_save+"/1.png")
 #     return rec_res
 
+@route('/getImages', methods=['GET'])
+def get_images():
+    # 查询数据库获取数据
+    query = "SELECT imgUrl, description FROM your_table"
+    cursor.execute(query)
+    data = cursor.fetchall()
+    column_names = [desc[0] for desc in cursor.description]
+
+    result = []
+    for row in data:
+        result.append(dict(zip(column_names, row))
+
+    return jsonify(result)
 
 
 def load_img_with_path(file_path):
